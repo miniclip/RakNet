@@ -9,5 +9,5 @@ since version 4.1.0.
 
 ## [4.1.0] - 2018-08-30
 ### Fixed
-- broken reassembly of fragmented packages [Joerg Boehnel]
+- broken reassembly of fragmented packets [Joerg Boehnel]
 - build errors on macOS+clang
