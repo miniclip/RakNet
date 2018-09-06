@@ -6,9 +6,11 @@ and this project (fork) adheres to [Semantic Versioning](http://semver.org/spec/
 since version 4.1.0.
 
 ## [Unreleased]
+
+## [4.2.0] - 2018-09-06
 ### Added
-- ability to build on iOS
-- ability to build on Android
+- ability of building on Android
+- ability of building on iOS
 
 ## [4.1.0] - 2018-08-30
 ### Fixed
