@@ -96,7 +96,7 @@ extern void Console2GetIPAndPort(unsigned int, char *, unsigned short *, unsigne
 */
 #endif
 
-
+static bool INET_REACHABLE = true;
 static const int NUM_MTU_SIZES=3;
 
 
@@ -139,6 +139,10 @@ struct PacketFollowedByData
 	Packet p;
 	unsigned char data[1];
 };
+
+void RakPeer::setInetReachable(bool b) {
+    INET_REACHABLE = b;
+}
 
 Packet *RakPeer::AllocPacket(unsigned dataSize, const char *file, unsigned int line)
 {
@@ -1766,8 +1770,6 @@ ConnectionState RakPeer::GetConnectionState(const AddressOrGUID systemIdentifier
     default:
 		return IS_NOT_CONNECTED;
 	}
-
-	return IS_NOT_CONNECTED;
 }
 
 
@@ -2927,7 +2929,6 @@ void RakPeer::GetSockets( DataStructures::List<RakNetSocket2* > &sockets )
 			return;
 		}
 	}
-	return;
 }
 void RakPeer::ReleaseSockets( DataStructures::List<RakNetSocket2* > &sockets )
 {
@@ -3675,7 +3676,7 @@ RakPeer::RemoteSystemStruct * RakPeer::AssignSystemAddressToRemoteSystemList( co
 				// For now use the incoming socket only
 				// Originally this code was to force a machine with multiple IP addresses to reply back on the IP
 				// that the datagram came in on
-				if (1 || foundIndex==(unsigned int)-1)
+				if (/* DISABLES CODE */ (1) || foundIndex==(unsigned int)-1)
 				{
 					// Must not be an internal LAN address. Just use whatever socket it came in on
 					remoteSystem->rakNetSocket=incomingRakNetSocket;
@@ -6467,7 +6468,9 @@ void RakPeer::FillIPList(void)
 
 	// Fill out ipList structure
 #if  !defined(WINDOWS_STORE_RT)
-	RakNetSocket2::GetMyIP( ipList );
+    if (INET_REACHABLE) {
+        RakNetSocket2::GetMyIP( ipList );
+    }
 #endif
 
 	// Sort the addresses from lowest to highest
