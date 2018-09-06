@@ -8,6 +8,8 @@
  *
  */
 
+#include "stddef.h"
+
 #ifndef _GCC_WIN_STRINGS
 #define _GCC_WIN_STRINGS
 

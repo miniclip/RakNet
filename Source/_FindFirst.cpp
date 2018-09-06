@@ -129,8 +129,6 @@ int _findnext(long h, _finddata_t *f)
                 
                 return 0;
 	}
-
-	return -1;
 }
 
 

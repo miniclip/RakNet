@@ -9,6 +9,7 @@
  */
 
 #include "EmptyHeader.h"
+#include "LinuxStrings.h"
 
 #ifdef RAKNET_SOCKET_2_INLINE_FUNCTIONS
 

@@ -63,6 +63,7 @@ public:
 	///Destructor
 	virtual ~RakPeer();
 
+    void setInetReachable(bool b);
 	// --------------------------------------------------------------------------------------------Major Low Level Functions - Functions needed by most users--------------------------------------------------------------------------------------------
 	/// \brief Starts the network threads and opens the listen port.
 	/// \details You must call this before calling Connect().
