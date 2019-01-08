@@ -63,7 +63,7 @@ public:
     /// \param[in] socketSendBufferSize Made to work on Linux/macOS only, might or might not work in other platforms
 	/// \param[in] threadPriority Passed to the thread creation routine. Use THREAD_PRIORITY_NORMAL for Windows. For Linux based systems, you MUST pass something reasonable based on the thread priorities for your application.
 	/// \return RAKNET_STARTED on success, otherwise appropriate failure enumeration.
-	virtual StartupResult Startup( unsigned int maxConnections, SocketDescriptor *socketDescriptors, unsigned socketDescriptorCount, size_t socketRecvBufferSize=256*1024, size_t socketSendBufferSize=16*1024, int threadPriority=-99999 );
+	virtual StartupResult Startup( unsigned int maxConnections, SocketDescriptor *socketDescriptors, unsigned socketDescriptorCount, size_t socketRecvBufferSize=256*1024, size_t socketSendBufferSize=16*1024, int threadPriority=-99999 )=0;
 
 	/// If you accept connections, you must call this or else security will not be enabled for incoming connections.
 	/// This feature requires more round trips, bandwidth, and CPU time for the connection handshake
