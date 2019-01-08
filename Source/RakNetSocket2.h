@@ -267,6 +267,10 @@ struct RNS2_BerkleyBindParameters
 	int pollingThreadPriority;
 	RNS2EventHandler *eventHandler;
 	unsigned short remotePortRakNetWasStartedOn_PS3_PS4_PSP2;
+    // hardecoded defaults in RakNetSocket2_Berkley before 
+    // these were made customisable
+    size_t socketRecvBufferSize = 1024 * 256; 
+    size_t socketSendBufferSize = 1024 * 16; 
 };
 
 // Every platform except Windows Store 8 can use the Berkley sockets interface
@@ -305,7 +309,7 @@ protected:
 
 	// Internal
 	void SetNonBlockingSocket(unsigned long nonblocking);
-	void SetSocketOptions(void);
+	void SetSocketOptions(size_t recvBufferSize, size_t sendBufferSize);
 	void SetBroadcastSocket(int broadcast);
 	void SetIPHdrIncl(int ipHdrIncl);
 	void RecvFromBlocking(RNS2RecvStruct *recvFromStruct);

@@ -59,10 +59,11 @@ public:
 	/// \param[in] maxConnections The maximum number of connections between this instance of RakPeer and another instance of RakPeer. Required so the network can preallocate and for thread safety. A pure client would set this to 1.  A pure server would set it to the number of allowed clients.- A hybrid would set it to the sum of both types of connections
 	/// \param[in] localPort The port to listen for connections on. On linux the system may be set up so thast ports under 1024 are restricted for everything but the root user. Use a higher port for maximum compatibility. 
 	/// \param[in] socketDescriptors An array of SocketDescriptor structures to force RakNet to listen on a particular IP address or port (or both).  Each SocketDescriptor will represent one unique socket.  Do not pass redundant structures.  To listen on a specific port, you can pass SocketDescriptor(myPort,0); such as for a server.  For a client, it is usually OK to just pass SocketDescriptor(); However, on the XBOX be sure to use IPPROTO_VDP
-	/// \param[in] socketDescriptorCount The size of the \a socketDescriptors array.  Pass 1 if you are not sure what to pass.
+    /// \param[in] socketRecvBufferSize Made to work on Linux/macOS only, might or might not work in other platforms
+    /// \param[in] socketSendBufferSize Made to work on Linux/macOS only, might or might not work in other platforms
 	/// \param[in] threadPriority Passed to the thread creation routine. Use THREAD_PRIORITY_NORMAL for Windows. For Linux based systems, you MUST pass something reasonable based on the thread priorities for your application.
 	/// \return RAKNET_STARTED on success, otherwise appropriate failure enumeration.
-	virtual StartupResult Startup( unsigned int maxConnections, SocketDescriptor *socketDescriptors, unsigned socketDescriptorCount, int threadPriority=-99999 )=0;
+	virtual StartupResult Startup( unsigned int maxConnections, SocketDescriptor *socketDescriptors, unsigned socketDescriptorCount, size_t socketRecvBufferSize=256*1024, size_t socketSendBufferSize=16*1024, int threadPriority=-99999 );
 
 	/// If you accept connections, you must call this or else security will not be enabled for incoming connections.
 	/// This feature requires more round trips, bandwidth, and CPU time for the connection handshake
