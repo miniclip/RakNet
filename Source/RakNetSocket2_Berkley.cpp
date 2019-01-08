@@ -21,11 +21,10 @@
 
 #include "Itoa.h"
 
-void RNS2_Berkley::SetSocketOptions(void)
+void RNS2_Berkley::SetSocketOptions(size_t recvBufferSize, size_t sendBufferSize)
 {
 	int r;
-	// This doubles the max throughput rate
-	int sock_opt=1024*256;
+	int sock_opt=recvBufferSize;
 	r = setsockopt__( rns2Socket, SOL_SOCKET, SO_RCVBUF, ( char * ) & sock_opt, sizeof ( sock_opt ) );
 	RakAssert(r==0);
 
@@ -38,9 +37,8 @@ void RNS2_Berkley::SetSocketOptions(void)
 
 
 
-	// This doesn't make much difference: 10% maybe
 	// Not supported on console 2
-	sock_opt=1024*16;
+	sock_opt=sendBufferSize;
 	r = setsockopt__( rns2Socket, SOL_SOCKET, SO_SNDBUF, ( char * ) & sock_opt, sizeof ( sock_opt ) );
 	RakAssert(r==0);
 
@@ -172,7 +170,7 @@ RNS2BindResult RNS2_Berkley::BindSharedIPV4( RNS2_BerkleyBindParameters *bindPar
 	if (rns2Socket == -1)
 		return BR_FAILED_TO_BIND_SOCKET;
 
-	SetSocketOptions();
+	SetSocketOptions(bindParameters->socketRecvBufferSize, bindParameters->socketSendBufferSize);
 	SetNonBlockingSocket(bindParameters->nonBlockingSocket);
 	SetBroadcastSocket(bindParameters->setBroadcast);
 	SetIPHdrIncl(bindParameters->setIPHdrIncl);
@@ -328,7 +326,7 @@ RNS2BindResult RNS2_Berkley::BindSharedIPV4And6( RNS2_BerkleyBindParameters *bin
 
 			freeaddrinfo(servinfo); // free the linked-list
 
-			SetSocketOptions();
+			SetSocketOptions(bindParameters->socketRecvBufferSize, bindParameters->socketSendBufferSize);
 			SetNonBlockingSocket(bindParameters->nonBlockingSocket);
 			SetBroadcastSocket(bindParameters->setBroadcast);
 			SetIPHdrIncl(bindParameters->setIPHdrIncl);
