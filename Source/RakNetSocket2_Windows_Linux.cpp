@@ -70,9 +70,10 @@ void GetMyIP_Windows_Linux_IPV4And6( SystemAddress addresses[MAXIMUM_NUMBER_OF_I
 #endif
 void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTERNAL_IDS] )
 {
-
-
-
+#if define(__APPLE__) && TARGET_OS_MAC
+	// https://stackoverflow.com/questions/40027067/cannot-resolve-local-hostname-after-upgrading-to-macos-sierra
+	return;
+#else
 	int idx=0;
 	char ac[ 80 ];
 	int err = gethostname( ac, sizeof( ac ) );
@@ -99,6 +100,7 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 		addresses[idx]=UNASSIGNED_SYSTEM_ADDRESS;
 		idx++;
 	}
+#endif
 
 }
 
