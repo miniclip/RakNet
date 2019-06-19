@@ -478,7 +478,7 @@ LIBSPEC struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
 	}
 	/* reception */
 	memset(&sockudp_r, 0, sizeof(struct sockaddr));
-	if(0/*ipv6*/) {
+	if(/* DISABLES CODE */ (0)/*ipv6*/) {
 		struct sockaddr_in6 * p = (struct sockaddr_in6 *)&sockudp_r;
 		p->sin6_family = AF_INET6;
 		if(sameport)
@@ -568,14 +568,14 @@ LIBSPEC struct UPNPDev * upnpDiscover(int delay, const char * multicastif,
 		} else {
 			((struct sockaddr_in *)&sockudp_r)->sin_addr.s_addr = mc_if.s_addr;
 		}
-		if(setsockopt(sudp, IPPROTO_IP, IP_MULTICAST_IF, (const char *)&mc_if, sizeof(mc_if)) < 0)
+		if(setsockopt(sudp, IPPROTO_IP, 9 /*IP_MULTICAST_IF*/, (const char *)&mc_if, sizeof(mc_if)) < 0)
 		{
 			PRINT_SOCKET_ERROR("setsockopt");
 		}
 	}
 
 	/* Avant d'envoyer le paquet on bind pour recevoir la reponse */
-    if (bind(sudp, &sockudp_r, 0/*ipv6*/?sizeof(struct sockaddr_in6):sizeof(struct sockaddr_in)) != 0)
+    if (bind(sudp, &sockudp_r, /* DISABLES CODE */ (0) /*ipv6*/?sizeof(struct sockaddr_in6):sizeof(struct sockaddr_in)) != 0)
 	{
         PRINT_SOCKET_ERROR("bind");
 		closesocket(sudp);

@@ -9,6 +9,7 @@
  */
 
 #include "UDPForwarder.h"
+#include <netdb.h>
 
 #if _RAKNET_SUPPORT_UDPForwarder==1
 
@@ -167,8 +168,6 @@ UDPForwarderResult UDPForwarder::StartForwarding(SystemAddress source, SystemAdd
 		}
 		startForwardingOutputMutex.Unlock();
 	}
-
-	return UDPFORWARDER_RESULT_COUNT;
 }
 void UDPForwarder::StopForwarding(SystemAddress source, SystemAddress destination)
 {
