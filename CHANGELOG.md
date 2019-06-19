@@ -7,7 +7,7 @@ since version 4.1.0.
 
 ## [UNRELEASED]
 ### Fixed
-- android arm64 compilation error
+- android arm64 compilation error [Alexandre Freitas]
 
 ## [4.3.1] - 2019-06-14
 ### Fixed
