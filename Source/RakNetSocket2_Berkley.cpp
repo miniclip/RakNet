@@ -35,7 +35,10 @@ void RNS2_Berkley::SetSocketOptions(size_t recvBufferSize, size_t sendBufferSize
 	r = setsockopt__( rns2Socket, SOL_SOCKET, SO_LINGER, ( char * ) & sock_opt, sizeof ( sock_opt ) );
 	// Do not assert, ignore failure
 
-
+#ifdef __APPLE__
+	sock_opt=1;
+	r = setsockopt__( rns2Socket, SOL_SOCKET, SO_NOSIGPIPE, ( char * ) & sock_opt, sizeof ( sock_opt ) );
+#endif
 
 	// Not supported on console 2
 	sock_opt=sendBufferSize;
