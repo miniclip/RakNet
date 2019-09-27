@@ -7,7 +7,7 @@ since version 4.1.0.
 
 ## [4.3.3] - 2019-09-27
 ### Fixed
-- ignore SIGPIPE signal on Apple devices [Pedro Almeida]
+- unwanted SIGPIPE signal upon OS-directed socket closure on recent Apple devices [Pedro Almeida]
 
 ## [4.3.2] - 2019-06-19
 ### Fixed
