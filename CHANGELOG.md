@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project (fork) adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 since version 4.1.0.
 
+## [UNRELEASED]
+### Fixed
+- heap-buffer-overflow when binding a shared IPV4 and IPV6 [Alexandre Freitas]
+
 ## [4.3.3] - 2019-09-27
 ### Fixed
 - unwanted SIGPIPE signal upon OS-directed socket closure on recent Apple devices [Pedro Almeida]
