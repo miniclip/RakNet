@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project (fork) adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 since version 4.1.0.
 
-## [UNRELEASED]
+## [4.3.4] - 2020-04-01
 ### Fixed
 - heap-buffer-overflow when binding a shared IPV4 and IPV6 [Alexandre Freitas]
 
