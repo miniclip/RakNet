@@ -87,6 +87,7 @@ int CCRakNetSlidingWindow::GetTransmissionBandwidth(CCTimeType curTime, CCTimeTy
 // ----------------------------------------------------------------------------------------------------------------------------
 bool CCRakNetSlidingWindow::ShouldSendACKs(CCTimeType curTime, CCTimeType estimatedTimeToNextTick)
 {
+#ifdef __ANDROID__
 	CCTimeType rto = GetSenderRTOForACK();
 	(void) estimatedTimeToNextTick;
 
@@ -96,6 +97,7 @@ bool CCRakNetSlidingWindow::ShouldSendACKs(CCTimeType curTime, CCTimeType estima
 		// Unknown how long until the remote system will retransmit, so better send right away
 		return true;
 	}
+#endif
 
 	return curTime >= oldestUnsentAck + SYN;
 }
